@@ -54,11 +54,25 @@ struct CalculatorEngine {
     }
     
     mutating func negatePressed() {
-        
+        switch operandSide {
+        case .leftHandSide:
+            mathEquation.negateLeftHandSide()
+            lcdDisplayText = mathEquation.lhs.formatted()
+        case .rightHandSide:
+            mathEquation.negateRightHandSide()
+            lcdDisplayText = mathEquation.rhs?.formatted() ?? "Error"
+        }
     }
     
     mutating func percentagePressed() {
-        
+        switch operandSide {
+        case .leftHandSide:
+            mathEquation.applyPercentageToLeftHandSide()
+            lcdDisplayText = mathEquation.lhs.formatted()
+        case .rightHandSide:
+            mathEquation.applyPercentageToRightHandSide()
+            lcdDisplayText = mathEquation.rhs?.formatted() ?? "Error"
+        }
     }
     
     // MARK: - Operations
@@ -87,7 +101,15 @@ struct CalculatorEngine {
     mutating func equalsPressed() {
         mathEquation.execute()
         operandSide = .leftHandSide
+        printEquationDebugConsole()
+        
         lcdDisplayText = mathEquation.result?.formatted() ?? "Error"
+    }
+
+    // MARK: - Debug Console
+    
+    private func printEquationDebugConsole() {
+        print("Equation: " + mathEquation.generatePrintout())
     }
     
     // MARK: - Number Input

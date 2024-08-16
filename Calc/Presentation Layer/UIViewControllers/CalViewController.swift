@@ -170,7 +170,6 @@ class CalViewController: UIViewController {
     
     @IBAction private func numberPressed(_ sender: UIButton) {
         let number = sender.tag
-        print("number \(number) is pressed")
         
         calculatorEngine.numberPressed(number)
         refreshLCDDisplay()
