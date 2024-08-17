@@ -18,6 +18,7 @@
 		51E98B192C6ED90F00ED225B /* UIColor+HexValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E98B182C6ED90F00ED225B /* UIColor+HexValue.swift */; };
 		51E98B1B2C6EE0F200ED225B /* MathEquation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E98B1A2C6EE0F200ED225B /* MathEquation.swift */; };
 		51E98B1D2C6F250000ED225B /* CalculatorEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E98B1C2C6F250000ED225B /* CalculatorEngine.swift */; };
+		51E98B252C6FFE6F00ED225B /* MathInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E98B242C6FFE6F00ED225B /* MathInputController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		51E98B182C6ED90F00ED225B /* UIColor+HexValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexValue.swift"; sourceTree = "<group>"; };
 		51E98B1A2C6EE0F200ED225B /* MathEquation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathEquation.swift; sourceTree = "<group>"; };
 		51E98B1C2C6F250000ED225B /* CalculatorEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorEngine.swift; sourceTree = "<group>"; };
+		51E98B242C6FFE6F00ED225B /* MathInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathInputController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				51E98B1C2C6F250000ED225B /* CalculatorEngine.swift */,
+				51E98B242C6FFE6F00ED225B /* MathInputController.swift */,
 			);
 			path = "Business Logic Layer";
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 			files = (
 				51E98B192C6ED90F00ED225B /* UIColor+HexValue.swift in Sources */,
 				51E98B1B2C6EE0F200ED225B /* MathEquation.swift in Sources */,
+				51E98B252C6FFE6F00ED225B /* MathInputController.swift in Sources */,
 				51E98AEB2C6EA58A00ED225B /* CalViewController.swift in Sources */,
 				51E98B172C6ED84400ED225B /* CalculatorTheme.swift in Sources */,
 				51E98AE72C6EA58A00ED225B /* AppDelegate.swift in Sources */,
