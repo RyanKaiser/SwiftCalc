@@ -20,6 +20,12 @@ struct MathEquation {
     var rhs: Decimal?
     var operation: OperationType?
     var result: Decimal?
+
+    // MARK: - Execution
+    
+    var executed: Bool {
+        return result != nil
+    }
     
     mutating func execute() {
         
@@ -28,8 +34,6 @@ struct MathEquation {
             let operation = self.operation else {
                 return
             }
-        
-        // MARK: - Execution
         
         switch operation {
         case .add:
