@@ -5,6 +5,7 @@ extension ThemeManager {
     
     var washedOutTheme: CalculatorTheme {
         return CalculatorTheme(
+            id: "9",
             backgroundColor:                "#ECF5FF",
             displayColor:                   "#0D2A4B",
                                

@@ -7,6 +7,7 @@ extension ThemeManager {
     
     var darkBlueTheme: CalculatorTheme {
         return CalculatorTheme(
+            id: "1",
             backgroundColor:                "#1D1D1D",
             displayColor:                   "#727272",
                                

@@ -33,7 +33,7 @@ class ThemeManager {
     
     init() {
         populateArrayOfTheme()
-        restoreSavedThemeIndex()
+        restoreSavedTheme()
     }
     
     private func populateArrayOfTheme() {
@@ -53,29 +53,52 @@ class ThemeManager {
     
     // MARK: - Save & Restore to Disk
     
-    private func restoreSavedThemeIndex() {
-        savedThemeIndex = 0
-        
-        if let previousThemeIndex = dataStore.getValue() as? Int {
-            savedThemeIndex = previousThemeIndex
+    private func restoreSavedTheme() {
+        guard let encodedTheme = dataStore.getValue() as? Data else {
+            return
         }
-        savedTheme = themes[savedThemeIndex]
+        let decoder = JSONDecoder()
+        if let previousTheme = try? decoder.decode(CalculatorTheme.self, from: encodedTheme) {
+            savedTheme = previousTheme
+        }
+        
     }
     
-    private func saveThemeIndexToDisk() {
-        dataStore.set(savedThemeIndex)
+    private func saveThemeIndexToDisk(_ theme: CalculatorTheme) {
+        let encoder = JSONEncoder()
+        if let encodedTheme = try? encoder.encode(theme) {
+            dataStore.set(encodedTheme)
+        }
     }
     
     // MARK: - Next Theme
     
     func moveToNextTheme() {
         
-        savedThemeIndex += 1
+        let currentThemeID = currentTheme.id
+        let index = themes.firstIndex { calculatorTheme in
+            calculatorTheme.id == currentThemeID
+        }
+        
+        guard let indexOfExistingTheme = index else {
+            if let firstTheme = themes.first {
+                updateSystemWithTheme(firstTheme)
+            }
+            return
+        }
+        
+        
+        savedThemeIndex += indexOfExistingTheme + 1
         if savedThemeIndex > themes.count - 1 {
             savedThemeIndex = 0
         }
         
-        savedTheme = themes[savedThemeIndex]
-        saveThemeIndexToDisk()
+        let theme = themes[savedThemeIndex]
+        updateSystemWithTheme(theme)
+    }
+    
+    private func updateSystemWithTheme(_ theme:CalculatorTheme) {
+        savedTheme = theme
+        saveThemeIndexToDisk(theme)
     }
 }

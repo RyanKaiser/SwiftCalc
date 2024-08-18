@@ -5,6 +5,7 @@ extension ThemeManager {
     
     var orangeTheme: CalculatorTheme {
         return CalculatorTheme(
+            id: "6",
             backgroundColor:                "#DC6969",
             displayColor:                   "#FFFFFF",
                                

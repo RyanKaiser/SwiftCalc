@@ -7,6 +7,7 @@ extension ThemeManager {
     
     var electroTheme: CalculatorTheme {
         return CalculatorTheme(
+            id: "3",
             backgroundColor:                "#0E0E41",
             displayColor:                   "#FFFFFF",
                                
