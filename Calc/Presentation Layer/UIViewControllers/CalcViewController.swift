@@ -46,13 +46,30 @@ class CalcViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        decorateView()
+        addThemeGestureRecogniser()
+        redecorateView()
+    }
+    
+    // MARK: - Gestures
+    
+    private func addThemeGestureRecogniser() {
+        let themeGestureRecogniser = UITapGestureRecognizer(target: self, action: #selector(self.themeGestureRecogniserDidTap(_:)))
+        themeGestureRecogniser.numberOfTapsRequired = 2
+        lcdDisplay.addGestureRecognizer(themeGestureRecogniser)
+    }
+    
+    @objc private func themeGestureRecogniserDidTap(_ gesture: UITapGestureRecognizer) {
+        decorateWithNextTheme()
     }
 
     // MARK: - Decorate
     
-    private func decorateView() {
+    private func decorateWithNextTheme() {
+        ThemeManager.shared.moveToNextTheme()
+        redecorateView()
+    }
+    
+    private func redecorateView() {
         view.backgroundColor = UIColor(hex: currentTheme.backgroundColor)
         lcdDisplay.backgroundColor = UIColor(hex: currentTheme.backgroundColor)
         displayLable.textColor = UIColor(hex: currentTheme.displayColor)

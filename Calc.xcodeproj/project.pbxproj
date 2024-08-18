@@ -31,6 +31,7 @@
 		51E98B3B2C71BD4600ED225B /* orangeTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E98B312C71BD4600ED225B /* orangeTheme.swift */; };
 		51E98B3C2C71BD4600ED225B /* pinkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E98B322C71BD4600ED225B /* pinkTheme.swift */; };
 		51E98B3F2C71CD7200ED225B /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E98B3E2C71CD7200ED225B /* ThemeManager.swift */; };
+		51E98B412C72926500ED225B /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E98B402C72926500ED225B /* DataStoreManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		51E98B312C71BD4600ED225B /* orangeTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = orangeTheme.swift; sourceTree = "<group>"; };
 		51E98B322C71BD4600ED225B /* pinkTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pinkTheme.swift; sourceTree = "<group>"; };
 		51E98B3E2C71CD7200ED225B /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		51E98B402C72926500ED225B /* DataStoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				51E98B282C70752000ED225B /* Swift Extensions */,
 				51E98B1E2C6FACCB00ED225B /* Presentation Layer */,
 				51E98B222C6FAD9800ED225B /* Business Logic Layer */,
+				51E98B422C72926F00ED225B /* Data Storage Layer */,
 				51E98B232C6FADB500ED225B /* Data Layer */,
 				51E98AEF2C6EA58B00ED225B /* Assets.xcassets */,
 				51E98AF42C6EA58B00ED225B /* Info.plist */,
@@ -226,6 +229,14 @@
 				51E98B2B2C71BD4600ED225B /* washedOutTheme.swift */,
 			);
 			path = ColorThemes;
+			sourceTree = "<group>";
+		};
+		51E98B422C72926F00ED225B /* Data Storage Layer */ = {
+			isa = PBXGroup;
+			children = (
+				51E98B402C72926500ED225B /* DataStoreManager.swift */,
+			);
+			path = "Data Storage Layer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,6 +381,7 @@
 				51E98B342C71BD4600ED225B /* electroTheme.swift in Sources */,
 				51E98B3B2C71BD4600ED225B /* orangeTheme.swift in Sources */,
 				51E98B362C71BD4600ED225B /* darkBlueTheme.swift in Sources */,
+				51E98B412C72926500ED225B /* DataStoreManager.swift in Sources */,
 				51E98B272C7047A000ED225B /* String+Prefix.swift in Sources */,
 				51E98B172C6ED84400ED225B /* CalculatorTheme.swift in Sources */,
 				51E98AE72C6EA58A00ED225B /* AppDelegate.swift in Sources */,
