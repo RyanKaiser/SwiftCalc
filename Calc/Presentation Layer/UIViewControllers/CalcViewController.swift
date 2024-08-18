@@ -8,7 +8,7 @@
 import UIKit
 
 
-class CalViewController: UIViewController {
+class CalcViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var lcdDisplay: UIView!
     @IBOutlet weak var displayLable: UILabel!
@@ -36,12 +36,9 @@ class CalViewController: UIViewController {
     @IBOutlet weak var equalsButton : UIButton!
     
     // MARK: - Color themes
+    
     var currentTheme: CalculatorTheme {
-        return CalculatorTheme(
-            backgroundColor: "#000000", displayColor: "#FFFFFF",
-            extraFunctionColor: "#a6a6a6", extraFuncionTitleColor: "#FFFFFF",
-            operationColor: "#ff9f0a", operationTitleColor: "#FFFFFF",
-            pinpadColor: "#333333", pinpadTitleColor: "#FFFFFF")
+        return ThemeManager.shared.currentTheme
     }
     
     // MARK: - Calculator Engine
@@ -59,8 +56,19 @@ class CalViewController: UIViewController {
         view.backgroundColor = UIColor(hex: currentTheme.backgroundColor)
         lcdDisplay.backgroundColor = UIColor(hex: currentTheme.backgroundColor)
         displayLable.textColor = UIColor(hex: currentTheme.displayColor)
-                
+
+        setNeedsStatusBarAppearanceUpdate()
+        
         decorateButtons()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        switch currentTheme.statusBarStyle {
+        case .light:
+            return .lightContent
+        case .dark:
+            return .darkContent
+        }
     }
     
     private func decorateButtons() {
@@ -97,8 +105,8 @@ class CalViewController: UIViewController {
         decorateButton(button)
         
         button.tintColor = UIColor(hex: currentTheme.extraFunctionColor)
-        button.setTitleColor(UIColor(hex: currentTheme.extraFuncionTitleColor), for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 40)
+        button.setTitleColor(UIColor(hex: currentTheme.extraFunctionTitleColor), for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
     }
     
     private func decorateOperationButton(_ button: UIButton) {
