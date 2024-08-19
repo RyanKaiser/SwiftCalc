@@ -19,7 +19,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Blc-YW-5p9">
                                 <rect key="frame" x="19.666666666666657" y="183" width="353.66666666666674" height="595"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ej3-qx-iC8">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ej3-qx-iC8" customClass="LCDDisplay" customModule="Calc" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="353.66666666666669" height="128"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="tXc-Gd-cT9">
@@ -36,6 +36,9 @@
                                             <constraint firstAttribute="bottom" secondItem="tXc-Gd-cT9" secondAttribute="bottom" id="qGm-2x-PJv"/>
                                             <constraint firstAttribute="trailing" secondItem="tXc-Gd-cT9" secondAttribute="trailing" constant="10" id="qz2-AI-LIY"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="label" destination="tXc-Gd-cT9" id="1gK-5u-i4M"/>
+                                        </connections>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="vK6-bS-bip">
                                         <rect key="frame" x="0.0" y="148" width="353.66666666666669" height="73.333333333333314"/>
@@ -310,8 +313,7 @@
                         <outlet property="addButton" destination="VUT-mD-A5B" id="eUU-LJ-33s"/>
                         <outlet property="clearButton" destination="cpE-Jr-qCw" id="RWa-0x-gbo"/>
                         <outlet property="decimalButton" destination="huh-DQ-4XP" id="dmc-KM-nhl"/>
-                        <outlet property="devideButton" destination="AQ5-jf-Qq4" id="S2c-RJ-iSP"/>
-                        <outlet property="displayLable" destination="tXc-Gd-cT9" id="nIQ-32-8C2"/>
+                        <outlet property="divideButton" destination="AQ5-jf-Qq4" id="S2c-RJ-iSP"/>
                         <outlet property="equalsButton" destination="XsR-9D-Pon" id="R2j-5G-7Xu"/>
                         <outlet property="lcdDisplay" destination="Ej3-qx-iC8" id="yJ0-YH-WaZ"/>
                         <outlet property="minusButton" destination="VZc-Ii-jj9" id="KPQ-Ui-t9h"/>

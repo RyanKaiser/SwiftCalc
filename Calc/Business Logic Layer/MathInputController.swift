@@ -200,4 +200,17 @@ struct MathInputController {
     var isCompleted: Bool {
         return mathEquation.executed
     }
+    
+    // MARK: - Copy & Paste
+    
+    mutating func pasteIn(_ decimal: Decimal) {
+        switch operandSide {
+        case .leftHandSide:
+            mathEquation.lhs = decimal
+        case .rightHandSide:
+            mathEquation.rhs = decimal
+        }
+        
+        lcdDisplayText = formatLCDDisplay(decimal)
+    }
 }

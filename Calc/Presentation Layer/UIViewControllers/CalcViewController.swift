@@ -10,8 +10,7 @@ import UIKit
 
 class CalcViewController: UIViewController {
     // MARK: - IBOutlets
-    @IBOutlet weak var lcdDisplay: UIView!
-    @IBOutlet weak var displayLable: UILabel!
+    @IBOutlet weak var lcdDisplay: LCDDisplay!
     
     @IBOutlet weak var pinpadButton0 : UIButton!
     @IBOutlet weak var pinpadButton1 : UIButton!
@@ -29,7 +28,7 @@ class CalcViewController: UIViewController {
     @IBOutlet weak var negateButton : UIButton!
     @IBOutlet weak var percentButton : UIButton!
     
-    @IBOutlet weak var devideButton : UIButton!
+    @IBOutlet weak var divideButton : UIButton!
     @IBOutlet weak var multiplyButton : UIButton!
     @IBOutlet weak var minusButton : UIButton!
     @IBOutlet weak var addButton : UIButton!
@@ -46,19 +45,21 @@ class CalcViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addThemeGestureRecogniser()
+        addThemeGestureRecognizer()
         redecorateView()
+        registerForNotification()
     }
     
     // MARK: - Gestures
     
-    private func addThemeGestureRecogniser() {
-        let themeGestureRecogniser = UITapGestureRecognizer(target: self, action: #selector(self.themeGestureRecogniserDidTap(_:)))
-        themeGestureRecogniser.numberOfTapsRequired = 2
-        lcdDisplay.addGestureRecognizer(themeGestureRecogniser)
+    private func addThemeGestureRecognizer() {
+        let themeGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.themeGestureRecognizerDidTap(_:)))
+        themeGestureRecognizer.numberOfTapsRequired = 2
+        lcdDisplay.addGestureRecognizer(themeGestureRecognizer)
     }
     
-    @objc private func themeGestureRecogniserDidTap(_ gesture: UITapGestureRecognizer) {
+    @objc private func themeGestureRecognizerDidTap(_ gesture: UITapGestureRecognizer) {
+        lcdDisplay.prepareForColorColorThemeUpdate()
         decorateWithNextTheme()
     }
 
@@ -72,7 +73,7 @@ class CalcViewController: UIViewController {
     private func redecorateView() {
         view.backgroundColor = UIColor(hex: currentTheme.backgroundColor)
         lcdDisplay.backgroundColor = UIColor(hex: currentTheme.backgroundColor)
-        displayLable.textColor = UIColor(hex: currentTheme.displayColor)
+        lcdDisplay.label.textColor = UIColor(hex: currentTheme.displayColor)
 
         setNeedsStatusBarAppearanceUpdate()
         
@@ -105,7 +106,7 @@ class CalcViewController: UIViewController {
         decorateExtraFunctionButton(negateButton)
         decorateExtraFunctionButton(percentButton)
         
-        decorateOperationButton(devideButton)
+        decorateOperationButton(divideButton)
         decorateOperationButton(multiplyButton)
         decorateOperationButton(minusButton)
         decorateOperationButton(addButton)
@@ -131,6 +132,7 @@ class CalcViewController: UIViewController {
         
         button.tintColor = UIColor(hex: currentTheme.operationColor)
         button.setTitleColor(UIColor(hex: currentTheme.operationTitleColor), for: .normal)
+        button.setTitleColor(UIColor(hex: currentTheme.operationTitleSelectedColor), for: .selected)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 50)
     }
     
@@ -142,19 +144,39 @@ class CalcViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
     }
     
+    // MARK: - Select Operation Buttons
+    
+    private func deselectOperationButtons() {
+        selectOperationButton(divideButton, false)
+        selectOperationButton(multiplyButton, false)
+        selectOperationButton(addButton, false)
+        selectOperationButton(minusButton, false)
+    }
+    
+    private func selectOperationButton(_ button: UIButton, _ selected: Bool) {
+        button.tintColor = selected ? UIColor(hex: currentTheme.operationSelectedColor) : UIColor(hex: currentTheme.operationColor)
+        button.isSelected = selected
+    }
+    
     // MARK: - IBActions
     
     @IBAction private func clearPressed() {
+        clearButton.bounce()
+        deselectOperationButtons()
         calculatorEngine.clearPressed()
         refreshLCDDisplay()
     }
     
     @IBAction private func negatePressed() {
+        negateButton.bounce()
+        deselectOperationButtons()
         calculatorEngine.negatePressed()
         refreshLCDDisplay()
     }
     
     @IBAction private func percentagePressed() {
+        percentButton.bounce()
+        deselectOperationButtons()
         calculatorEngine.percentagePressed()
         refreshLCDDisplay()
     }
@@ -162,26 +184,48 @@ class CalcViewController: UIViewController {
     // MARK: - Operations
     
     @IBAction private func addPressed() {
+        addButton.bounce()
+        
+        deselectOperationButtons()
+        selectOperationButton(addButton, true)
+        
         calculatorEngine.addPressed()
         refreshLCDDisplay()
     }
     
     @IBAction private func minusPressed() {
+        minusButton.bounce()
+        
+        deselectOperationButtons()
+        selectOperationButton(minusButton, true)
+        
         calculatorEngine.minusPressed()
         refreshLCDDisplay()
     }
     
     @IBAction private func multiplyPressed() {
+        multiplyButton.bounce()
+        deselectOperationButtons()
+        selectOperationButton(multiplyButton, true)
+        
         calculatorEngine.multiplyPressed()
         refreshLCDDisplay()
     }
     
     @IBAction private func dividePressed() {
+        divideButton.bounce()
+        deselectOperationButtons()
+        selectOperationButton(divideButton, true)
+        
         calculatorEngine.dividePressed()
         refreshLCDDisplay()
     }
     
     @IBAction private func equalsPressed() {
+        equalsButton.bounce()
+        
+        deselectOperationButtons()
+        
         calculatorEngine.equalsPressed()
         refreshLCDDisplay()
     }
@@ -189,12 +233,19 @@ class CalcViewController: UIViewController {
     // MARK: - Number Input
     
     @IBAction private func decimalPressed() {
+        decimalButton.bounce()
+        
+        deselectOperationButtons()
+        
         calculatorEngine.decimalPressed()
         refreshLCDDisplay()
     }
     
     @IBAction private func numberPressed(_ sender: UIButton) {
         let number = sender.tag
+        sender.bounce()
+        
+        deselectOperationButtons()
         
         calculatorEngine.numberPressed(number)
         refreshLCDDisplay()
@@ -203,7 +254,27 @@ class CalcViewController: UIViewController {
     // MARK: Refresh LCDDisplay
 
     private func refreshLCDDisplay() {
-        displayLable.text = calculatorEngine.lcdDisplayText
+        lcdDisplay.label.text = calculatorEngine.lcdDisplayText
+    }
+    
+    // MARK: - Notifications
+    
+    private func registerForNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didReceivePasteNotification(notification:)), name: Notification.Name("ryan.Calc.LCDDisplay.pasteNumber"), object: nil)
+    }
+    
+    @objc private func didReceivePasteNotification(notification: Notification) {
+        guard let doubleValue = notification.userInfo?["PasteKey"] as? Double else { return }
+        
+        let decimalValue = Decimal(doubleValue)
+        pasateNumberIntoCalculator(from: decimalValue)
+    }
+    
+    // MARK: - Copy & Pasate
+    
+    private func pasateNumberIntoCalculator(from decimal: Decimal) {
+        calculatorEngine.pasteInNumber(from: decimal)
+        refreshLCDDisplay()
     }
 }
 

@@ -115,4 +115,14 @@ struct CalculatorEngine {
         historyLog = []
     }
     
+    // MARK: - Copy & Paste
+    
+    mutating func pasteInNumber(from decimal: Decimal) {
+        
+        if inputController.isCompleted {
+            inputController = MathInputController()
+        }
+        inputController.pasteIn(decimal)
+    }
+    
 }

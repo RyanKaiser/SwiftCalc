@@ -1,13 +1,10 @@
-
-
 import Foundation
 
 
 extension ThemeManager {
     
     var lightTheme: CalculatorTheme {
-        return CalculatorTheme(
-            id: "5",
+        return CalculatorTheme(id:          "3",
             backgroundColor:                "#F6F8F9",
             displayColor:                   "#000000",
                                
@@ -16,11 +13,12 @@ extension ThemeManager {
                                
             operationColor:                 "#4BE6A9",
             operationTitleColor:            "#14145C",
+            operationSelectedColor:         "#70729D",
+            operationTitleSelectedColor:    "#ffffff",
                                
             pinpadColor:                    "#E9F0F4",
             pinpadTitleColor:               "#000000",
-            
-            statusBarStyle: .light
-        )
+                               
+            statusBarStyle:                 .dark)
     }
 }
